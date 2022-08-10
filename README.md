@@ -1,2 +1,8 @@
 # oc-product-tyre-variations
-Opencart Module foe handling Car Tires Variations
+Opencart Module for handling Car Tires Variations
+
+## Version
+
+0.x.x (Under development)
+
+## Features

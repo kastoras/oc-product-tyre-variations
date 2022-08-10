@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <name>Product Tyre Variation</name>
+    <code>product_tyre_variation</code>
+    <version>0.7.0</version>
+    <author>Anthimidis Nikos</author>
+    <link>#</link>
+    <file path="catalog/controller/product/product.php">
+        <operation>
+            <search>
+                <![CDATA[$data['products'] = array();]]>
+            </search>
+            <add position="">
+                <![CDATA[
+      $data['tpv'] = $this->load->controller('extension/module/product_tyre_variation/showTyreVariations', ['product_id' => $product_id, 'search' => $_GET['search']]);
+      ]]>
+            </add>
+        </operation>
+    </file>
+    <file path="catalog/controller/product/product.php">
+        <operation>
+            <search>
+                <![CDATA[@todo]]>
+            </search>
+            <add position="">
+                <![CDATA[
+      {{ tpv }}
+      ]]>
+            </add>
+        </operation>
+    </file>
+    <file path="admin/model/catalog/manufacturer.php">
+        <operation>
+            <search>
+                <![CDATA[return $query->row['total'];]]>
+            </search>
+            <add position="after" offset="1">
+                <![CDATA[
+        public function getManufacturerByName($name) {
+          $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "manufacturer WHERE name like '".$name."'");
+
+          return $query->row;
+        }
+      ]]>
+            </add>
+        </operation>
+    </file>
+    <file path="admin/model/catalog/product.php">
+        <operation>
+            <search>
+                <![CDATA[public function getTotalProductsByLayoutId($layout_id) {]]>
+            </search>
+            <add position="after" offset="4">
+                <![CDATA[
+        public function getProductIdByName($productName){
+
+          $query = $this->db->query("SELECT p.product_id FROM " . DB_PREFIX . "product p
+            INNER JOIN " . DB_PREFIX . "product_description pd ON pd.product_id = p.product_id
+            WHERE pd.name LIKE '" . $productName . "'");
+
+
+          if(isset($query->row['product_id'])){
+            return $query->row['product_id'];
+          }
+
+          return false;
+          
+        }
+      ]]>
+            </add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/basel/template/common/headers/header2.twig">
+        <operation>
+            <search>
+                <![CDATA[<a href="{{ home }}"><img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" /></a>]]>
+            </search>
+            <add position="replace">
+                <![CDATA[
+        <a href="{{ home }}">
+          <img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="logo-main" />
+          <img src="https://elastikapetrana.gr/image/petranalogo-white.png" title="{{ name }}" alt="{{ name }}" class="logo-sec" />
+        </a>
+      ]]>
+            </add>
+        </operation>
+    </file>
+    <file path="catalog/model/catalog/product.php">
+        <operation>
+            <search>
+                <![CDATA[$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";]]>
+            </search>
+            <add position="after" offset="2">
+                <![CDATA[
+        if( !empty($data['filter_product_id'])){
+          $sql .= ' OR p.product_id in ('.$data['filter_product_id'].') ';	
+        }
+      ]]>
+            </add>
+        </operation>
+        <operation>
+            <search>
+                <![CDATA[public function getTotalProductSpecials() {]]>
+            </search>
+            <add position="before">
+                <![CDATA[
+        public function checkProductCategory($product_id, $category_ids) {          
+          $implode = array();
+          foreach ($category_ids as $category_id) {
+            $implode[] = (int)$category_id;
+          }
+          $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_to_category WHERE product_id = '" . (int)$product_id . "' AND category_id IN(" . implode(',', $implode) . ")");
+          return $query->row;
+        }
+      ]]>
+            </add>
+        </operation>
+    </file>
+    <file path="catalog/controller/product/search.php">
+        <operation>
+            <search>
+                <![CDATA[if (isset($this->request->get['search']) || isset($this->request->get['tag'])) {]]>
+            </search>
+            <add position="replace">
+                <![CDATA[ if (isset($this->request->get['search']) || isset($this->request->get['tag']) || isset($this->request->post['width'])) { ]]>
+            </add>
+        </operation>
+        <operation>
+            <search>
+                <![CDATA['limit'               => $limit]]>
+            </search>
+            <add position="after" offset="2">
+                <![CDATA[
+			$searchVariations = $this->request->get['search'];
+			
+			if(isset($this->request->post['width']) && $this->request->post['width'] !=' '){
+				
+				$searchVariations .= $this->request->post['width'];
+				
+				if(isset($this->request->post['height']) && $this->request->post['height']!=''){
+
+					$searchVariations .= '/'.$this->request->post['height'];
+
+					if(isset($this->request->post['diameter']) && $this->request->post['diameter']!=''){
+
+						$searchVariations .= '/'.$this->request->post['diameter'];
+					}
+				}	
+				$filter_data = [
+					'filter_name' => $searchVariations,
+					'filter_tag'  => $searchVariations,
+				];
+			}
+
+			if($variations = $this->load->controller('extension/module/product_tyre_variation/tyreVariationQuickSearch', ['search' => $searchVariations])){
+
+				$filter_data['filter_product_id'] = $variations['products_ids'];
+        $filter_data['filter_product_variations'] = $variations['products_variations'];
+				$filter_data['filter_product_variations_prices'] = [];
+				$this->load->model('extension/module/product_tyre_variation');
+				foreach($filter_data['filter_product_variations'] as $productID => $variations){
+					foreach($variations as $variationID){
+						$variationData = $this->model_extension_module_product_tyre_variation->getVariationData($productID,$variationID);
+						
+						if($variationData['width'] != '' && $variationData['height'] != '' && $variationData['diameter'] != ''){
+							$diameter = $variationData['width'] .'/'. $variationData['height'] .'R'. $variationData['diameter']  ;
+						}
+						else{
+							$diameter = $variationData['size_overal'];
+						}
+						$data['product_variations_prices'][$productID][]=[
+							'diameter' 		=> $diameter,
+							'price'			=> $variationData['price'],
+							'price_discount'=> $variationData['price_discount'],
+						];
+					}
+				}
+			}
+      ]]>
+            </add>
+        </operation>
+        <operation>
+            <search>
+                <![CDATA[$this->response->setOutput($this->load->view('product/search', $data));]]>
+            </search>
+            <add position="before">
+                <![CDATA[
+      	if(!($this->session->data['user_id'] == 1 || $this->session->data['user_id'] == 2 || $this->customer->isLogged())){
+         	$data['product_variations_prices'] = [];
+        }      
+      ]]>
+            </add>
+        </operation>
+    </file>
+    <file path="admin/controller/catalog/product.php">
+        <operation>
+            <search>
+                <![CDATA[$data['layouts'] = $this->model_design_layout->getLayouts();]]>
+            </search>
+            <add position="after">
+                <![CDATA[
+		$data['tyre_variations'] = 'Δεν έχουν εισαχθεί ακόμα Διαστάσεις ελαστικού';
+		if(isset($this->request->get['product_id'])){
+			$data['tyre_variations'] = $this->load->controller('extension/module/product_tyre_variation/loadTyreVariations',[$this->request->get['product_id']]);
+		}
+      ]]>
+            </add>
+        </operation>
+    </file>
+    <file path="admin/view/template/catalog/product_form.twig">
+        <operation>
+            <search>
+                <![CDATA[<li><a href="#tab-option" data-toggle="tab">{{ tab_option }}</a></li>]]>
+            </search>
+            <add position="after">
+                <![CDATA[
+        <li><a href="#tab-tyre-variations" data-toggle="tab">{{ tab_tyre_variations }}</a></li>
+      ]]>
+            </add>
+        </operation>
+        <operation>
+            <search>
+                <![CDATA[<div class="tab-pane" id="tab-option">]]>
+            </search>
+            <add position="before">
+                <![CDATA[
+          <div class="tab-pane" id="tab-tyre-variations">
+            {{tyre_variations}}
+          </div>
+      ]]>
+            </add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/*/template/product/single_product.twig">
+        <operation>
+            <search>
+                <![CDATA[<a class="product-name" href="{{ product.href }}">{{ product.name }}</a>]]>
+            </search>
+            <add position="after">
+                <![CDATA[
+        {% for variation_data in product_variations_prices[product.product_id] %}
+            <p class="variation-price">
+                <a href="{{ product.href }}">
+                    {{ variation_data['diameter'] }} - 
+                    {% if variation_data['price_discount'] != '0.00' %}
+                        <span class="variation-price-number-old">{{ variation_data['price'] }} €</span> 
+                        <span class="variation-price-number">{{ variation_data['price_discount'] }}</span>
+                    {% else %}        
+                        <span class="variation-price-number">{{ variation_data['price'] }}</span>
+                    {% endif %}
+                    €
+                </a>
+            </p>
+        {% endfor %}
+      ]]>
+            </add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/product/product.twig">
+        <operation>
+            <search>
+                <![CDATA[<li class="active"><a href="#tab-description" data-toggle="tab">{{ tab_description }}</a></li>]]>
+            </search>
+            <add position="after">
+                <![CDATA[
+            <li><a href="#tab-tyre-variations" data-toggle="tab">Διαστάσεις</a></li>
+      ]]>
+            </add>
+        </operation>
+        <operation>
+            <search>
+                <![CDATA[<div class="tab-pane active" id="tab-description">{{ description }}</div>]]>
+            </search>
+            <add position="before">
+                <![CDATA[
+            <div class="tab-pane" id="tab-tyre-variations">{{ tpv }}</div>
+      ]]>
+            </add>
+        </operation>
+    </file>
+</modification>

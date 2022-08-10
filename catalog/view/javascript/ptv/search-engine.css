@@ -1,0 +1,105 @@
+.search-form {
+    padding: 15px;
+    background-color: #e1e1e1;
+}
+
+.select {
+    position: relative;
+    height: 44px;
+    background-color: #fff;
+    transition: opacity .2s ease;
+}
+
+.select, .text-radio-selector label {
+    display: inline-block;
+    -webkit-transition: opacity .2s ease;
+    cursor: pointer;
+}
+
+.select, .select select {
+    width: 100%;
+}
+
+select, select option {
+    font-size: 18px;
+}
+
+select {
+    height: 44px;
+    padding: 0 35px 0 15px;
+    border: none;
+    background-color: #fff;
+    transition: opacity .2s ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+
+.input__search, select, select option {
+    font-weight: 300;
+}
+
+button, select {
+    text-transform: none;
+}
+
+.radio-selector {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+}
+
+.radio-selector a.is-active, .radio-selector a.is-active:after, .radio-selector a.is-active:before, .radio-selector input:checked+label, .radio-selector input:checked+label:after, .radio-selector input:checked+label:before {
+    background-color: #00a9e0!important;
+    color: #fff!important;
+}
+
+.radio-selector a {
+    margin-right: 1em;
+}
+
+.radio-selector a, .radio-selector label {
+    position: relative;
+    display: inline-block;
+    height: 44px;
+    min-width: 60px;
+    line-height: 44px;
+    background-color: #fff;
+    cursor: pointer;
+    -webkit-transition: opacity .2s ease;
+    transition: opacity .2s ease;
+    text-align: center;
+}
+
+.language-selector, .link__phone, a.is-active {
+    text-decoration: none;
+}
+
+a.active {
+    background: #337ab7;
+    color: #fff;
+    border: none;
+}
+
+.button {
+    padding: 0 60px;
+    line-height: 55px;
+    font-size: 28px;
+}
+
+.button {
+    position: relative;
+    display: inline-block;
+    line-height: 44px;
+    padding: 0 30px;
+    border: none;
+    transition: opacity .2s ease;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.button, .button:after {
+    background-color: #00a9e0;
+}

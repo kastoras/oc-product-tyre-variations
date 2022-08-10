@@ -1,0 +1,142 @@
+
+
+<style>
+.table th{
+    font-size: 16px;
+    font-weight: 500;
+    color: #010000;
+}
+.table td{
+    font-size: 16px;
+    font-weight: 500;
+    color: #010000;
+}
+.text-red {
+    color: #fe0000;
+}
+.text-blue {
+    color: #1862a3;
+}
+.table_cell {
+    text-align: center;
+    display: table-cell;
+    min-width: 50px;
+    padding: 15px 2px;
+    vertical-align: middle;
+}
+.table table td:nth-child(odd), .table table tr:nth-child(odd), .table table_cell:nth-child(odd), .table table_row:nth-child(odd), .table td:nth-child(odd), .table tr:nth-child(odd), .table_cell:nth-child(odd), .table_row:nth-child(odd) {
+    background-color: hsla(0,0%,100%,.45);
+}
+
+.table_cell .table-header-image{
+    display: block;
+    max-height: 80px;
+    background-color: #1862a3;
+}
+
+.table_cell .table-header-image img{
+    max-height: 70px;
+    padding: 5px;
+    max-width:100%;
+}
+
+.table_cell .table-header-label{    
+    display: block;
+    padding: 5px;
+}
+
+.table_cell .table-header-number{
+    display: block;
+    text-align: center;
+    background-color: #1862a3;
+    color: #fff;
+}
+
+h2.all-steel-table{
+    text-align: center;
+}
+
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
+.image-div-table-classification img{
+    object-fit: cover;
+    width: 100%;
+    height: 400px;
+}
+
+.full-screen-promo-module{
+    width: 100vw;
+    margin: 0;
+    margin-left: calc(50% - 50vw);
+}
+
+.grey-full-promo{
+    background: #1862a3;
+}
+
+.padding-bot-60{
+    padding-bottom: 60px;
+}
+
+.color-white{
+    color: #fff;
+}
+
+.widget-title p.color-white.widget-title-separator:after{
+    background-color: #ffffff;
+}
+</style>
+
+<div class="search-form col-md-12">
+    <form method="post" action="/en/include/act/act_search.php">
+	
+	
+	  <!--div class="radio-selector radio-selector__bordered tire-spike-selector js-tire-spike-selector hide">
+		<input type="radio" id="tire-spike__with" name="tire-spike" value="with" checked=""><label for="tire-spike__with">шип</label>
+		<input type="radio" id="tire-spike__without" name="tire-spike" value="without"><label for="tire-spike__without">нешип</label>
+	  </div-->
+		<div class="col-md-2">
+            <div class="select">
+                <select name="width">
+                <option value="">Width</option>
+                <option value="135">135</option><option value="155">155</option><option value="165">165</option><option value="175">175</option><option value="185">185</option><option value="195">195</option><option value="205">205</option><option value="215">215</option><option value="225">225</option><option value="235">235</option><option value="245">245</option><option value="255">255</option><option value="265">265</option><option value="285">285</option>	</select>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="select">
+                <select name="height">
+                <option value="">Height</option>
+                <option value="40">40</option><option value="45">45</option><option value="50">50</option><option value="55">55</option><option value="60">60</option><option value="65">65</option><option value="70">70</option><option value="75">75</option><option value="80">80</option>	</select>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="select">
+                <select name="radius">
+                <option value="">Diameter at rim seat</option>
+                <option value="r12">R12</option><option value="r13">R13</option><option value="r14">R14</option><option value="r15">R15</option><option value="r16">R16</option><option value="r17">R17</option><option value="r18">R18</option><option value="r19">R19</option>	</select>
+            </div>
+        </div>
+
+	    <div class="col-md-3 ">
+	
+            <div class="radio-selector">
+                <a class="is-active">All</a>
+                <a class="icon__winter"><img src="data:image/svg+xml;base64,IDxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiB2aWV3Qm94PSIwIDAgMzIgMzIiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xNi4xOCAtMTYpIj48ZGVmcz48cGF0aCBpZD0iYSIgZD0iTTAgMGg2NHY2NEgweiIvPjwvZGVmcz48Y2xpcFBhdGggaWQ9ImIiPjx1c2UgeGxpbms6aHJlZj0iI2EiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIG92ZXJmbG93PSJ2aXNpYmxlIi8+PC9jbGlwUGF0aD48cGF0aCBkPSJNMzIgMjMuMzA0Yy00Ljc0IDAtOC41OTggMy45LTguNTk4IDguNjk2IDAgNC43OTUgMy44NTcgOC42OTYgOC41OTggOC42OTYgNC43NCAwIDguNTk4LTMuOSA4LjU5OC04LjY5NiAwLTQuNzk1LTMuODU3LTguNjk2LTguNTk4LTguNjk2bTAgMTUuMzA1Yy0zLjYwMyAwLTYuNTM0LTIuOTY2LTYuNTM0LTYuNjFzMi45My02LjYxIDYuNTM0LTYuNjFjMy42MDMgMCA2LjUzNCAyLjk2NiA2LjUzNCA2LjYxcy0yLjkzIDYuNjEtNi41MzQgNi42MU0zMy4wMzIgMTZoLTIuMDY0djUuNTY1aDIuMDY0VjE2em0tNy41OTggNy44ODRsLTMuODktMy45MzYtMS40NiAxLjQ3NiAzLjg5IDMuOTM1IDEuNDYtMS40NzZ6bS0zLjc1IDcuMDczSDE2LjE4djIuMDg3aDUuNTAzdi0yLjA4N3ptLTEuNiAxMS42MmwxLjQ2IDEuNDc0IDMuODktMy45MzMtMS40Ni0xLjQ3Ni0zLjg5IDMuOTM2ek0zMC45NjggNDhoMi4wNjR2LTUuNTY1aC0yLjA2NFY0OHptNy41OTgtNy44ODNsMy44OSAzLjkzNSAxLjQ2LTEuNDc1LTMuODktMy45MzYtMS40NiAxLjQ3N3ptMy43NS03LjA3NGg1LjUwNHYtMi4wODdoLTUuNTAzdjIuMDg3em0xLjYtMTEuNjJsLTEuNDYtMS40NzUtMy44OSAzLjkzNSAxLjQ1OCAxLjQ3NiAzLjg5LTMuOTM2eiIgY2xpcC1wYXRoPSJ1cmwoI2IpIiBmaWxsPSIjOWQ5ZDlkIi8+PC9nPjwvc3ZnPg==" alt="Winter" /></a>
+                <a class="icon__summer"><img src="data:image/svg+xml;base64,IDxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjgiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAyOCAzMiI+PHBhdGggZD0iTTI2LjI2IDEzLjU3OGwuODQ3LTEuOTQ1LTIuMzctMS4xNDYgMi41NjUtMS41NjItMS4wMTQtMS44NTItMi41NjUgMS41NjIuMjQzLTIuNzM2LTIuMDItLjIwMi0uMzggNC4yNDctNi43MzUgNC4xLS4xNjMuMXYtOC40bDMuMy0yLjQ3LTEuMTc1LTEuNzQzLTIuMTI1IDEuNTlWMGgtMi4wM3YzLjEyMmwtMi4xMjctMS41OS0xLjE3MiAxLjc0NCAzLjI5OCAyLjQ3djguNGwtLjE2NS0uMS02LjczMy00LjEtLjM4LTQuMjQ4LTIuMDIuMi4yNDQgMi43MzctMi41NjQtMS41NjJMMCA4LjkyNWwyLjU2NyAxLjU2Mi0yLjM3IDEuMTQ2Ljg0NiAxLjk0NSAzLjY4LTEuNzggNi43MzMgNC4xLjE2Ni4xLTYuOSA0LjItMy42OC0xLjc3Ny0uODQ1IDEuOTQ1IDIuMzcgMS4xNDZMMCAyMy4wN2wxLjAxNiAxLjg1NiAyLjU2NS0xLjU2Mi0uMjQzIDIuNzM2IDIuMDIuMTk4LjM4LTQuMjQ3IDYuOS00LjE5N3Y4LjRsLTMuMyAyLjQ2OCAxLjE3MyAxLjc0NyAyLjEyNi0xLjU5MlYzMmgyLjAzdi0zLjEyNWwyLjEyNiAxLjU5MiAxLjE3NC0xLjc0Ni0zLjMtMi40Njh2LTguNGw2LjkgNC4yLjM4IDQuMjQ2IDIuMDItLjE5OC0uMjQzLTIuNzM2IDIuNTY1IDEuNTYyIDEuMDE0LTEuODU1LTIuNTY1LTEuNTYgMi4zNy0xLjE0NS0uODQ3LTEuOTQ0LTMuNjggMS43OC02LjktNC4yMDIuMTY3LS4xIDYuNzM0LTQuMSIgZmlsbD0iIzlkOWQ5ZCIvPjwvc3ZnPg==" alt="Summer" /></a>
+            </div>
+        </div>            
+	
+
+        <div class="col-md-2">
+            <button class="button" type="submit" id="submit_filter_button">Εύρεση</button>
+        </div>
+	
+        <input type="hidden" name="season" value="all">
+        <input type="hidden" name="current_page" value="/en/tyre_catalog/car/">
+  </form>
+</div>

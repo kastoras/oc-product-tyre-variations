@@ -1,0 +1,48 @@
+</div>
+<div class="widget cm_module">
+    <div class="cm_block_wrapper">
+        <div class="cm_block 2" style="background-color:#e1e1e1;padding:25px;">
+            <div class="container">
+
+                <div class="widget-title">
+                    <h3 class="header-h3">{{title}}</h3><p></p>
+                </div>
+
+                <div class="cm_block_wrapper">
+                    <div id="passenger-search" class="search-form col-md-12">
+                        <form method="post" action="/index.php?route=product/search">
+                            <div class="col-md-2">
+                                <search-select :selectname="'width'" :firstoption="'Πλάτος'" :productcategory="'{{ productcategory }}'"></search-select>
+                            </div>
+
+                            <div class="col-md-2">
+                                <search-select :selectname="'height'" :firstoption="'Ύψος'" :productcategory="'{{ productcategory }}'"></search-select>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="select">
+                                    <search-select :selectname="'diameter'" :firstoption="'Διάμετρος'" :productcategory="'{{ productcategory }}'"></search-select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 ">
+                                <radio-button-img></radio-button-img>
+                            </div>            
+                        
+
+                            <div class="col-md-2">
+                                <button class="button" type="submit" id="submit_filter_button">Εύρεση</button>
+                            </div>
+                        
+                            <input type="hidden" name="current_page" value="">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="catalog/view/javascript/ptv/passenger_search/app.vue.js"></script>
+
+<div class="container">

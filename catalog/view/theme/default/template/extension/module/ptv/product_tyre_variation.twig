@@ -1,0 +1,60 @@
+<h4 class="primary-color">Διαστάσεις</h4>
+{% for key,tyres in variations %}
+
+<div class="table_header m-t-20 js-table-expander">
+    <div class="header_left centered-content">
+        <span class="">R{{key}}</span>
+        <span class="" style="margin-left: 25px;">
+        {% if tyres|first['season'] == 'Summer' %}
+             <img src="../../../image/ptv/sun.png" style="height: 25px;"/>
+        {% elseif  tyres|first['season'] == 'Winter' %}
+             <img src="../../../image/ptv/snowflake.png" style="height: 25px;"/>
+        {% endif %}
+
+        </span>
+    </div>
+    <div class="header_right">
+        <span class="collapser-arrow"></span>
+    </div>
+</div>
+
+<div class="expand-container {% if loop.first %}is-active{% endif %}">
+    <div class="table-wrap">
+        <div class="table tire-size-table">
+            {% for tyre in tyres %}
+            <div class="table_row">
+                <div class="table_cell tac">
+                    <a class="link__underlined" href="">{{tyre.size_overal}}</a>
+                </div>
+                <div class="table_cell tac">
+                    <img src="../../../image/ptv/load-index.png" style="height: 25px;"/><span> {{tyre.load_index}}</span>
+                </div>                
+                <div class="table_cell tac">{{tyre.speed}}</div>
+                <div class="table_cell tac">
+                    <img src="../../../image/ptv/tyre-n.png" style="height: 25px;"/><span> {{tyre.external_rollin}}</span>
+                </div>
+                <div class="table_cell tac">
+                    <img src="../../../image/ptv/tyre-fuel.png" style="height: 25px;"/><span> {{tyre.fuel_efficiency}}</span>
+                </div>
+                <div class="table_cell tac">
+                    <img src="../../../image/ptv/tyre-rain.png" style="height: 25px;"/><span> {{tyre.wet_grib}}</span>
+                </div>                                
+            </div>
+                {% if tyre.availability is defined %}
+                <div class="table_row" style="border-bottom: 1px solid #9d9d9c;">
+                    <div class="table_cell tac">
+                        Διαθεσιμότητα: {{tyre.availability}}
+                    </div>
+                    <div class="table_cell tac">Τιμή: {{tyre.price}}</div>                             
+                </div>  
+                {% endif %}             
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+{% if tpv_all is defined %}
+<p style="color: #2694d0;">Κάντε κλικ <a href="{{tpv_all}}"/>εδώ</a>, για να δείτε όλες τιε διαστάσεις του ελαστικού.</p>
+{% endif %}
+<p>{{tax_label}}</p>
