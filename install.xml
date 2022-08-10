@@ -2,7 +2,7 @@
 <modification>
     <name>Product Tyre Variation</name>
     <code>product_tyre_variation</code>
-    <version>0.7.0</version>
+    <version>0.7.1</version>
     <author>Anthimidis Nikos</author>
     <link>#</link>
     <file path="catalog/controller/product/product.php">

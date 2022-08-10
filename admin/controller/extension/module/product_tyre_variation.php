@@ -12,6 +12,10 @@ class ControllerExtensionModuleProductTyreVariation extends Controller
 
         $this->load->model('setting/module'); // loads the model
 
+        $this->load->model('extension/module/product_tyre_variation');
+
+        $this->model_extension_module_product_tyre_variation->install();
+
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
             if (!isset($this->request->get['module_id'])) {
                 $this->model_setting_module->addModule('product_tyre_variation', $this->request->post); // adds a new module
